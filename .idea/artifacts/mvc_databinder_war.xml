@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="mvc_databinder:war">
+    <output-path>$PROJECT_DIR$/mvc_databinder/target</output-path>
+    <root id="archive" name="mvc_databinder.war">
+      <element id="artifact" artifact-name="mvc_databinder:war exploded" />
+    </root>
+  </artifact>
+</component>

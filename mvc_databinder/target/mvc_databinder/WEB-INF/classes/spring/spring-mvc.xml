@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="com.hnnd.databinder.controller,com.hnnd.databinder.converter" />
+    <!--处理静态资源-->
+    <mvc:default-servlet-handler/>
+    <!---->
+    <mvc:annotation-driven conversion-service="conversionService"/>
+    <!--jsp视图解析器-->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="/WEB-INF/pages/" />
+    </bean>
+
+    <!--文件上次下载解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--允许文件上传的最大为10M-->
+        <property name="maxUploadSize" value="10485760" />
+        <!-- 上传文件的编码 -->
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+
+    <!--自定义的类型转化器-->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="userConverter"></ref>
+            </set>
+        </property>
+    </bean>
+</beans>
